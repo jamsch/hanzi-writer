@@ -8,4 +8,18 @@ module.exports = {
     ],
     '@babel/preset-typescript',
   ],
+  env: {
+    test: {
+      presets: [
+        [
+          '@babel/preset-env',
+          {
+            targets: {
+              node: 'current',
+            },
+          },
+        ],
+      ],
+    },
+  },
 };
