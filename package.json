@@ -13,6 +13,7 @@
       "npm-package"
     ],
     "plugins": [
+      "@semantic-release/commit-analyzer",
       [
         "@semantic-release/exec",
         {
@@ -30,6 +31,7 @@
     "@rollup/plugin-babel": "^5.2.3",
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-node-resolve": "^11.1.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
     "@semantic-release/exec": "^5.0.0",
     "@semantic-release/npm": "^7.0.10",
     "@sinonjs/fake-timers": "^7.0.2",
@@ -47,6 +49,7 @@
     "jest-fetch-mock": "^3.0.3",
     "nise": "^4.0.4",
     "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
     "rollup": "^2.39.0",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-filesize": "^9.1.0",
@@ -59,7 +62,7 @@
     "test": "jest",
     "lint-test": "eslint -c .eslintrc src",
     "lint-fix": "eslint --fix --ext .tsx,.ts .",
-    "build": "rm -rf build && rollup -c",
+    "build": "rimraf build && rollup -c",
     "semantic-release": "cross-env CI=true semantic-release",
     "prettier": "prettier -w src",
     "typecheck": "tsc --noEmit --skipLibCheck"
