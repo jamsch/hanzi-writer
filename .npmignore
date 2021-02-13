@@ -17,3 +17,5 @@ babel-jest-processor.js
 Gruntfile.js
 jest-setup.js
 yarn.lock
+node-main.js
+tsconfig.json

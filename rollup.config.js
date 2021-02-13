@@ -3,7 +3,6 @@ import ts from '@wessberg/rollup-plugin-ts';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import copy from 'rollup-plugin-copy';
 import filesize from 'rollup-plugin-filesize';
 
 const SOURCE_DIR = '.';
@@ -11,13 +10,6 @@ const OUTPUT_DIR = 'dist';
 
 const tsPlugin = ts({
   transpiler: 'babel',
-  hook: {
-    // Only output the declaration file "index.d.ts"
-    outputPath: (path) =>
-      path.includes('index.d.ts')
-        ? path.replace('dist/types', 'dist/index.d.ts')
-        : undefined,
-  },
 });
 
 export default function RollupConfig({ watch }) {
@@ -36,14 +28,6 @@ export default function RollupConfig({ watch }) {
           exclude: 'node_modules/**',
           babelHelpers: 'bundled',
           presets: [['@babel/preset-env', { loose: true }]],
-        }),
-        copy({
-          targets: [
-            { src: `${SOURCE_DIR}/package.json`, dest: OUTPUT_DIR },
-            { src: `${SOURCE_DIR}/README.md`, dest: OUTPUT_DIR },
-            { src: 'LICENSE', dest: OUTPUT_DIR },
-          ],
-          verbose: true,
         }),
       ],
     },
@@ -68,7 +52,7 @@ export default function RollupConfig({ watch }) {
         sourcemap: true,
       },
       plugins: [
-        ts({ transpiler: 'babel' }),
+        tsPlugin,
         babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
         terser({ ecma: 8, safari10: true }),
         filesize(),
