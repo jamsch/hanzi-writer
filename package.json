@@ -4,23 +4,13 @@
   "author": "David Chanin <chanindav@gmail.com> (http://chanind.github.io/hanzi-writer/)",
   "description": "Hanzi Writer is a free and open-source javascript library for both animating simplified Chinese characters and quizzing users on character stroke order.",
   "repository": "jamsch/hanzi-writer",
-  "main": "main.js",
-  "module": "index.js",
-  "types": "index.d.ts",
-  "unpkg": "umd/hanzi-writer.production.min.js",
+  "main": "dist/main.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "unpkg": "dist/umd/hanzi-writer.production.min.js",
   "release": {
     "branches": [
       "npm-package"
-    ],
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      [
-        "@semantic-release/exec",
-        {
-          "prepareCmd": "npm run build",
-          "publishCmd": "cd build/hanzi-writer && npm publish --access public"
-        }
-      ]
     ]
   },
   "devDependencies": {
@@ -31,9 +21,6 @@
     "@rollup/plugin-babel": "^5.2.3",
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-node-resolve": "^11.1.1",
-    "@semantic-release/commit-analyzer": "^8.0.1",
-    "@semantic-release/exec": "^5.0.0",
-    "@semantic-release/npm": "^7.0.10",
     "@sinonjs/fake-timers": "^7.0.2",
     "@types/jest": "^26.0.20",
     "@types/nise": "^1.4.0",
@@ -56,13 +43,15 @@
     "rollup-plugin-license": "^2.2.0",
     "rollup-plugin-terser": "^7.0.2",
     "semantic-release": "^17.3.9",
-    "typescript": "^4.1.5"
+    "typescript": "^4.1.5",
+    "cross-env": "^7.0.3"
   },
   "scripts": {
     "test": "jest",
     "lint-test": "eslint -c .eslintrc src",
     "lint-fix": "eslint --fix --ext .tsx,.ts .",
-    "build": "rimraf build && rollup -c",
+    "build": "rimraf dist && rollup -c",
+    "prepublishOnly": "npm run build",
     "semantic-release": "cross-env CI=true semantic-release",
     "prettier": "prettier -w src",
     "typecheck": "tsc --noEmit --skipLibCheck"
@@ -82,8 +71,5 @@
     "testURL": "https://test.com/url#tag",
     "collectCoverage": true,
     "testEnvironment": "<rootDir>/../jest-jsdom-env"
-  },
-  "dependencies": {
-    "cross-env": "^7.0.3"
   }
 }

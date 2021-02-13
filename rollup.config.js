@@ -7,7 +7,7 @@ import copy from 'rollup-plugin-copy';
 import filesize from 'rollup-plugin-filesize';
 
 const SOURCE_DIR = '.';
-const OUTPUT_DIR = 'build/hanzi-writer';
+const OUTPUT_DIR = 'dist';
 
 const tsPlugin = ts({
   transpiler: 'babel',
@@ -15,7 +15,7 @@ const tsPlugin = ts({
     // Only output the declaration file "index.d.ts"
     outputPath: (path) =>
       path.includes('index.d.ts')
-        ? path.replace('dist/types', 'build/hanzi-writer')
+        ? path.replace('dist/types', 'dist/index.d.ts')
         : undefined,
   },
 });
